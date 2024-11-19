@@ -13,8 +13,19 @@ key = 0
 
 # user inputs a message and selects a key (or random), the message is then translated using the cipher
 def encode_message():
-    encode = input("Input your message here : ")
-    
+    message = input("Input your message here : ")
+    cypher = input("How many letters would you like to shift by? : ")
+    print(f"This is your cypher : {cypher}")
+
+    for x in range(len(message)):
+        letter = ord(message[x])
+
+        if letter >= 97 and letter <= 122:
+            print(chr(letter - 32), end="")
+        elif letter >= 65 and letter <= 90:
+            print(chr(letter + 32), end="")
+        else:
+            print(chr(letter), end="")
     pass
 
 
@@ -31,9 +42,9 @@ def decode_file():
 
 # runs if the key is unknown. If this is true, print out all possible decoding combinations.
 def decode_unknown_key(filename):
-    key = 0
-    if key == 0:
-    key = random.randint(1, 26)      
+    cypher = 0
+    if 1 > cypher > 26:
+    cypher = random.randint(1, 26)
     pass
 
 

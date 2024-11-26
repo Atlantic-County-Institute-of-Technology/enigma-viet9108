@@ -13,18 +13,19 @@ key = 0
 
 
 # user inputs a message and selects a key (or random), the message is then translated using the cipher
-def encode_message():
+def encode_message(scrabbled=None):
     message = input("Input your message here : ")
     cypher = input("How many letters would you like to shift by? : ")
-    cypher = 0
-    if 1 > cypher > 26:
+    if 1 > int(cypher) > 26:
         cypher = random.randint(1, 26)
     print(f"This is your cypher : {cypher}")
 
     for x in range(len(message)):
-        letter = ord(message[x])
-
-        #find function here
+        y = alphabet.find(message[x])
+        z = (y+int(cypher)) % 26
+        print(f'{alphabet[z]}', end="")
+        # if ' ' in message:
+        #     print(f' ', end="")
     pass
 
 
@@ -36,23 +37,32 @@ def encode_file():
 # decodes target file using a user-specified key. If key is unknown, a keypress should
 # call decode_unknown_key()
 def decode_file():
+
     pass
 
 
 # runs if the key is unknown. If this is true, print out all possible decoding combinations.
-def decode_unknown_key(filename):
-
+def decode_unknown_key():
+    unknown = input("Enter your encoded message : ")
+    for i in range(len(alphabet)):
+        print(f'{i}: ', end="")
+        for x in range(len(unknown)):
+            y = alphabet.find(unknown[x])
+            z = (y-i) % 26
+            print(f'{alphabet[z]}', end="")
+        print("\n")
     pass
 
 
 # main method declaration
 def main():
     while True:
-        print(f"Welcome to the Enigma Machine!\n"
+        print(f"\nWelcome to the Enigma Machine!\n"
               f"Please select an option:\n"
               f"[1]: Encode a custom message.\n"
               f"[2]: Encode file.\n"
               f"[3]: Decode file.\n"
+              f"[5]: Decode message.\n"
               f"[4]: Exit.")
 
         selection = input("Choose an option:")
@@ -66,6 +76,8 @@ def main():
         elif selection == "4":
             print("Goodbye.")
             exit()
+        elif selection == "5":
+            decode_unknown_key()
         else:
             print("Invalid choice. Please try again.")
 
@@ -73,10 +85,3 @@ def main():
 # runs on program start
 if __name__ == "__main__":
     main()
-
-
-
-# runs on program start
-if __name__ == "__main__":
-    main()
-
